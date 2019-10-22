@@ -1,0 +1,112 @@
+html {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #e7eeec;
+}
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 150px;
+  font-family: "Press Start 2P", cursive;
+  font-size: 50%;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.content-container {
+  width: 200px;
+  height: 165px;
+  background-color: #a4cabd;
+  box-shadow: 3px -3px 0px 1px #718b82;
+  color: #f8f8f8;
+  h1 {
+    color: #f8f8f8;
+  }
+  h2 {
+    color: #41504b;
+  }
+  h4 {
+    font-family: "Press Start 2P", cursive;
+    font-size: 50%;
+    margin: 0px;
+    color: #2a3e3f;
+  }
+  button {
+    color: #41504b;
+
+    outline: none;
+    background-color: #b4ddcf;
+    // box-shadow: 1px -1px 0px 1px #bde9da;
+    width: 60px;
+    margin: 5px;
+  }
+}
+
+.split-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  p {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    color: red;
+  }
+}
+.fadein {
+  animation: fadein;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+
+.fadeout {
+  animation: fadein;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+
+@keyframes fadein {
+  100% {
+    opacity: 1;
+  }
+
+  0% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

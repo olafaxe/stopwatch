@@ -98,10 +98,10 @@ class App extends Component {
   render() {
     let splits = (
       <>
-        {this.state.splitAll.map((split, index) => {
+        {this.state.splitAll.map(split => {
           return (
             <>
-              <Split key={index.toString()} split={split}></Split>
+              <Split key={split.toString()} split={split}></Split>
             </>
           );
         })}

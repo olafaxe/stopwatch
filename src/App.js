@@ -13,6 +13,7 @@ class App extends Component {
       text: true,
       running: false,
       reset: true,
+      time: 0,
       centi: 0,
       deci: 0,
       min: 0,
@@ -39,13 +40,22 @@ class App extends Component {
       });
     } else {
       this.setState({
-        timerStart: Date.now() - this.state.centi
+        time: this.state.time,
+        timerStart: Date.now() - this.state.time
       });
       this.timerID = setInterval(
-        () =>
-          this.tick(
-            this.state.running ? this.state.centi : this.state.timerStart
-          ),
+        () => {
+          this.setState(
+            {
+              time: Date.now() - this.state.timerStart,
+              centi: Math.floor(this.state.time / 10) % 100,
+              deci: Math.floor(this.state.time / 1000) % 60,
+              min: Math.floor(this.state.time / 60000) % 60
+            },
+            console.log(this.state.min)
+          );
+        },
+
         10
       );
       this.setState({
@@ -60,26 +70,6 @@ class App extends Component {
 
   resetHandle() {
     !this.state.reset ? this.splitTime() : this.resetTime();
-  }
-
-  tick(start) {
-    console.log(Math.floor((Date.now() - start) / 1000) % 60);
-    if (this.state.deci >= 59) {
-      this.setState({
-        min: this.state.min + 1,
-        deci: 0,
-        centi: 0
-      });
-    } else if (this.state.centi >= 99) {
-      this.setState({
-        deci: this.state.deci + 1,
-        centi: 0
-      });
-    } else {
-      this.setState({
-        centi: Math.floor((Date.now() - start) / 10) % 100
-      });
-    }
   }
 
   splitTime() {
@@ -114,6 +104,7 @@ class App extends Component {
     this.setState({
       text: "Start",
       running: false,
+      time: 0,
       centi: 0,
       deci: 0,
       min: 0,

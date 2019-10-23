@@ -4,6 +4,7 @@ import Content from "./components/Content/Content";
 import Time from "./components/Time/Time";
 import Button from "./components/Button/Button";
 import Split from "./components/Split/Split";
+import SplitContainer from "./components/Split/SplitContainer";
 
 class App extends Component {
   constructor(props) {
@@ -14,12 +15,10 @@ class App extends Component {
       running: false,
       reset: true,
       time: 0,
-      centi: 0,
-      deci: 0,
-      min: 0,
-      split1: false,
-      split2: false,
-      split3: false
+      ms: 0,
+      ss: 0,
+      mm: 0,
+      splitAll: []
     };
 
     this.clickHandle = this.clickHandle.bind(this);
@@ -45,15 +44,12 @@ class App extends Component {
       });
       this.timerID = setInterval(
         () => {
-          this.setState(
-            {
-              time: Date.now() - this.state.timerStart,
-              centi: Math.floor(this.state.time / 10) % 100,
-              deci: Math.floor(this.state.time / 1000) % 60,
-              min: Math.floor(this.state.time / 60000) % 60
-            },
-            console.log(this.state.min)
-          );
+          this.setState({
+            time: Date.now() - this.state.timerStart,
+            ms: Math.floor(this.state.time / 10) % 100,
+            ss: Math.floor(this.state.time / 1000) % 60,
+            mm: Math.floor(this.state.time / 60000) % 60
+          });
         },
 
         10
@@ -73,31 +69,18 @@ class App extends Component {
   }
 
   splitTime() {
-    if (!this.state.split1) {
+    if (this.state.splitAll.length >= 3) {
+      let newTemp = this.state.splitAll.splice(2, 3);
       this.setState({
-        split1: `${
-          this.state.min <= 9 ? "0" + this.state.min : this.state.min4
-        }:${this.state.deci <= 9 ? "0" + this.state.deci : this.state.deci}:${
-          this.state.centi <= 9 ? "0" + this.state.centi : this.state.centi
-        }`
-      });
-    } else if (!this.state.split2) {
-      this.setState({
-        split2: `${
-          this.state.min <= 9 ? "0" + this.state.min : this.state.min4
-        }:${this.state.deci <= 9 ? "0" + this.state.deci : this.state.deci}:${
-          this.state.centi <= 9 ? "0" + this.state.centi : this.state.centi
-        }`
-      });
-    } else if (!this.state.split3) {
-      this.setState({
-        split3: `${
-          this.state.min <= 9 ? "0" + this.state.min : this.state.min4
-        }:${this.state.deci <= 9 ? "0" + this.state.deci : this.state.deci}:${
-          this.state.centi <= 9 ? "0" + this.state.centi : this.state.centi
-        }`
+        splitAll: [newTemp, ...this.state.splitAll]
       });
     }
+    const tempTime = `${
+      this.state.mm <= 9 ? "0" + this.state.mm : this.state.min4
+    }:${this.state.ss <= 9 ? "0" + this.state.ss : this.state.ss}:${
+      this.state.ms <= 9 ? "0" + this.state.ms : this.state.ms
+    }`;
+    this.setState({ splitAll: [tempTime, ...this.state.splitAll] });
   }
 
   resetTime() {
@@ -105,31 +88,38 @@ class App extends Component {
       text: "Start",
       running: false,
       time: 0,
-      centi: 0,
-      deci: 0,
-      min: 0,
-      split1: false,
-      split2: false,
-      split3: false
+      ms: 0,
+      ss: 0,
+      mm: 0,
+      splitAll: []
     });
   }
 
   render() {
+    let splits = (
+      <>
+        {this.state.splitAll.map((split, index) => {
+          return (
+            <>
+              <Split key={index.toString()} split={split}></Split>
+            </>
+          );
+        })}
+      </>
+    );
     return (
       <div className="App">
         <Content>
           <Time
-            centi={
-              this.state.centi >= 100
+            ms={
+              this.state.ms >= 100
                 ? "99"
-                : this.state.centi <= 9
-                ? "0" + this.state.centi
-                : this.state.centi
+                : this.state.ms <= 9
+                ? "0" + this.state.ms
+                : this.state.ms
             }
-            deci={
-              this.state.deci <= 9 ? "0" + this.state.deci : this.state.deci
-            }
-            min={this.state.min <= 9 ? "0" + this.state.min : this.state.min}
+            ss={this.state.ss <= 9 ? "0" + this.state.ss : this.state.ss}
+            mm={this.state.mm <= 9 ? "0" + this.state.mm : this.state.mm}
           ></Time>
           <Button
             click={this.clickHandle}
@@ -139,15 +129,7 @@ class App extends Component {
             click={this.resetHandle}
             text={this.state.reset ? "RESET" : "SPLIT"}
           ></Button>
-          <Split
-            split={this.state.split1 ? this.state.split1 : " --:--:--"}
-          ></Split>
-          <Split
-            split={this.state.split2 ? this.state.split2 : " --:--:--"}
-          ></Split>
-          <Split
-            split={this.state.split3 ? this.state.split3 : " --:--:--"}
-          ></Split>
+          <SplitContainer>{splits}</SplitContainer>
         </Content>
       </div>
     );

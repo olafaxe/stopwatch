@@ -110,3 +110,19 @@ body {
     opacity: 1;
   }
 }
+
+.split-container-container {
+  display: flex;
+  flex-direction: column;
+}
+.split-container:nth-child(1) {
+  font-size: 150%;
+}
+.split-container:nth-child(2) {
+  font-size: 100%;
+  opacity: 0.7;
+}
+.split-container:nth-child(3) {
+  font-size: 75%;
+  opacity: 0.3;
+}

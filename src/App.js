@@ -21,15 +21,15 @@ class App extends Component {
       splitAll: ["-:-:-", "-:-:-", "-:-:-"]
     };
 
-    this.clickHandle = this.clickHandle.bind(this);
-    this.resetHandle = this.resetHandle.bind(this);
+    this.startStopHandle = this.startStopHandle.bind(this);
+    this.resetSplitHandle = this.resetSplitHandle.bind(this);
   }
 
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
 
-  clickHandle() {
+  startStopHandle() {
     if (this.state.running) {
       clearInterval(this.timerID);
       this.timerID = false;
@@ -63,7 +63,7 @@ class App extends Component {
     }));
   }
 
-  resetHandle() {
+  resetSplitHandle() {
     !this.state.reset ? this.splitTime() : this.resetTime();
   }
 
@@ -121,11 +121,11 @@ class App extends Component {
             mm={this.state.mm <= 9 ? "0" + this.state.mm : this.state.mm}
           ></Time>
           <Button
-            click={this.clickHandle}
+            click={this.startStopHandle}
             text={this.state.text ? "Start" : "Stop"}
           ></Button>
           <Button
-            click={this.resetHandle}
+            click={this.resetSplitHandle}
             text={this.state.reset ? "RESET" : "SPLIT"}
           ></Button>
           <SplitContainer>{splits}</SplitContainer>

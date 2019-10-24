@@ -18,7 +18,7 @@ class App extends Component {
       ms: 0,
       ss: 0,
       mm: 0,
-      splitAll: []
+      splitAll: ["-:-:-", "-:-:-", "-:-:-"]
     };
 
     this.clickHandle = this.clickHandle.bind(this);
@@ -91,7 +91,7 @@ class App extends Component {
       ms: 0,
       ss: 0,
       mm: 0,
-      splitAll: []
+      splitAll: ["-:-:-", "-:-:-", "-:-:-"]
     });
   }
 

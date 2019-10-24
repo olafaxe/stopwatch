@@ -66,19 +66,6 @@ body {
   }
 }
 
-.split-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-
-  p {
-    position: absolute;
-    right: 20px;
-    top: 5px;
-    color: red;
-  }
-}
 .fadein {
   animation: fadein;
   animation-duration: 1s;
@@ -111,18 +98,42 @@ body {
   }
 }
 
+.split-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  p {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    color: red;
+  }
+}
+
 .split-container-container {
   display: flex;
   flex-direction: column;
 }
 .split-container:nth-child(1) {
   font-size: 150%;
+  p {
+    right: 2px;
+  }
 }
 .split-container:nth-child(2) {
   font-size: 100%;
-  opacity: 0.7;
+  color: #0000007a;
+  p {
+    right: 32px;
+  }
 }
 .split-container:nth-child(3) {
   font-size: 75%;
-  opacity: 0.3;
+  color: #00000036;
+
+  p {
+    right: 48px;
+  }
 }

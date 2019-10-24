@@ -4,7 +4,7 @@ const Time = props => {
   return (
     <>
       <h1>
-        {props.mm}:{props.ss}:{props.ms}
+        {props.mm}:{props.ss}:{props.cs}
       </h1>
     </>
   );

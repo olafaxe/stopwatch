@@ -15,7 +15,7 @@ class App extends Component {
       running: false,
       reset: true,
       time: 0,
-      ms: 0,
+      cs: 0,
       ss: 0,
       mm: 0,
       splitAll: ["-:-:-", "-:-:-", "-:-:-"]
@@ -45,7 +45,7 @@ class App extends Component {
         () => {
           this.setState({
             time: Date.now() - this.state.timerStart,
-            ms: Math.floor(this.state.time / 10) % 100,
+            cs: Math.floor(this.state.time / 10) % 100,
             ss: Math.floor(this.state.time / 1000) % 60,
             mm: Math.floor(this.state.time / 60000) % 60
           });
@@ -77,7 +77,7 @@ class App extends Component {
     const tempTime = `${
       this.state.mm <= 9 ? "0" + this.state.mm : this.state.min4
     }:${this.state.ss <= 9 ? "0" + this.state.ss : this.state.ss}:${
-      this.state.ms <= 9 ? "0" + this.state.ms : this.state.ms
+      this.state.cs <= 9 ? "0" + this.state.cs : this.state.cs
     }`;
     this.setState({ splitAll: [tempTime, ...this.state.splitAll] });
   }
@@ -87,7 +87,7 @@ class App extends Component {
       text: "Start",
       running: false,
       time: 0,
-      ms: 0,
+      cs: 0,
       ss: 0,
       mm: 0,
       splitAll: ["-:-:-", "-:-:-", "-:-:-"]
@@ -110,12 +110,12 @@ class App extends Component {
       <div className="App">
         <Content>
           <Time
-            ms={
-              this.state.ms >= 100
+            cs={
+              this.state.cs >= 100
                 ? "99"
-                : this.state.ms <= 9
-                ? "0" + this.state.ms
-                : this.state.ms
+                : this.state.cs <= 9
+                ? "0" + this.state.cs
+                : this.state.cs
             }
             ss={this.state.ss <= 9 ? "0" + this.state.ss : this.state.ss}
             mm={this.state.mm <= 9 ? "0" + this.state.mm : this.state.mm}

@@ -39,7 +39,6 @@ class App extends Component {
       });
     } else {
       this.setState({
-        time: this.state.time,
         timerStart: Date.now() - this.state.time
       });
       this.timerID = setInterval(
